@@ -1,8 +1,12 @@
 package com.dlnu.controller;
 
+import com.dlnu.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @author haenu
@@ -16,8 +20,24 @@ public class UserController {
 
     @RequestMapping("/save")
     @ResponseBody
-    public String save() {
-        System.out.println("user save...");
+    public String save(@RequestParam("name") String username, int age) {
+        System.out.println("name======>"+username);
+        System.out.println("age=======>"+age);
         return "{'module':'springmvc'}";
     }
+
+    @RequestMapping("/pojouser")
+    @ResponseBody
+    public String pojol(User user){
+        System.out.println(user);
+        return "{'module':'springmvc'}";
+    }
+
+    @RequestMapping("/listTest")
+    @ResponseBody
+    public String ListTest(@RequestParam List<String> lists){
+        System.out.println(lists);
+        return "{'module':'springmvc'}";
+    }
+
 }
