@@ -1,43 +1,85 @@
 package com.dlnu.controller;
 
 import com.dlnu.domain.User;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-/**
- * @author haenu
- * @version 1.0
- * @date 2023/02/12 0:30
- */
-
-@Controller
-@RequestMapping("/user")
+@RestController
+@RequestMapping ("/users")
 public class UserController {
 
-    @RequestMapping("/save")
-    @ResponseBody
-    public String save(@RequestParam("name") String username, int age) {
-        System.out.println("name======>"+username);
-        System.out.println("age=======>"+age);
-        return "{'module':'springmvc'}";
+    //设置当前请求方法为POST，表示REST风格中的添加操作
+  @PostMapping
+    public String save(){
+        System.out.println("user save...");
+        return "{'module':'user save'}";
     }
 
-    @RequestMapping("/pojouser")
-    @ResponseBody
-    public String pojol(User user){
-        System.out.println(user);
-        return "{'module':'springmvc'}";
+    //设置当前请求方法为DELETE，表示REST风格中的删除操作
+    //@PathVariable注解用于设置路径变量（路径参数），要求路径上设置对应的占位符，并且占位符名称与方法形参名称相同
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Integer id){
+        System.out.println("user delete..." + id);
+        return "{'module':'user delete'}";
     }
 
-    @RequestMapping("/listTest")
-    @ResponseBody
-    public String ListTest(@RequestParam List<String> lists){
-        System.out.println(lists);
-        return "{'module':'springmvc'}";
+    //设置当前请求方法为PUT，表示REST风格中的修改操作
+    @PutMapping
+    public String update(@RequestBody User user){
+        System.out.println("user update..."+user);
+        return "{'module':'user update'}";
+    }
+
+    //设置当前请求方法为GET，表示REST风格中的查询操作
+    //@PathVariable注解用于设置路径变量（路径参数），要求路径上设置对应的占位符，并且占位符名称与方法形参名称相同
+    @GetMapping("/{id}")
+    public String getById(@PathVariable Integer id){
+        System.out.println("user getById..."+id);
+        return "{'module':'user getById'}";
+    }
+
+    //设置当前请求方法为GET，表示REST风格中的查询操作
+    @GetMapping
+    public String getAll(){
+        System.out.println("user getAll...");
+        return "{'module':'user getAll'}";
     }
 
 }
+
+
+
+
+
+
+
+
+
+/*
+    @RequestMapping
+    @ResponseBody
+    public String delete(){
+        System.out.println("user delete...");
+        return "{'module':'user delete'}";
+    }
+
+    @RequestMapping
+    @ResponseBody
+    public String update(){
+        System.out.println("user update...");
+        return "{'module':'user update'}";
+    }
+
+    @RequestMapping
+    @ResponseBody
+    public String getById(){
+        System.out.println("user getById...");
+        return "{'module':'user getById'}";
+    }
+
+    @RequestMapping
+    @ResponseBody
+    public String getAll(){
+        System.out.println("user getAll...");
+        return "{'module':'user getAll'}";
+    }
+    */
